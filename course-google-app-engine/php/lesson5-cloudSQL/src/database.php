@@ -1,7 +1,7 @@
 <?php
 
 //Connect to Cloud SQL
-$conn = mysql_connect(":/cloudsql/<appid>:<dbinstance>","root","Ove52SWE");
+$conn = mysql_connect(":/cloudsql/<appid>:<dbinstance>","<user>","<password>");
 if(!$conn){
 	die('Connect Error(' . mysql_error());
 }
