@@ -1,0 +1,12 @@
+application: myapp
+version: cron
+runtime: php
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /cron
+  script: cron.php
+  login: admin
+- url: .*
+  script: main.php
