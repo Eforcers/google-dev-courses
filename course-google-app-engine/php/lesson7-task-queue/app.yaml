@@ -1,0 +1,11 @@
+application: myapp
+version: queue
+runtime: php
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /task.php
+  script: task.php
+- url: .*
+  script: main.php
