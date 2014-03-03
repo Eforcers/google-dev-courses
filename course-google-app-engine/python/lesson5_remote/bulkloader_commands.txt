@@ -1,0 +1,6 @@
+appcfg.py download_data --url=http://remote.www-ecpc.appspot.com/_ah/remote_api --filename=datastore_20140304
+
+appcfg.py upload_data --url=http://localhost:8080/_ah/remote_api
+--filename=datastore_20140304
+
+appcfg.py create_bulkloader_config --filename=bulkloader.yaml --url=http://remote.www-ecpc.appspot.com/_ah/remote_api
