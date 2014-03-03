@@ -1,6 +1,6 @@
 from google.appengine.ext import ndb
 import webapp2
-from models import Person
+from models import Person, Company
 from datetime import date
 
 class InsertHandler(webapp2.RequestHandler):
@@ -11,8 +11,6 @@ class InsertHandler(webapp2.RequestHandler):
                         birth_date=date(1983, 2, 21))
         person.put()
         self.response.write('Inserted Person!')
-
-
 
 class InsertMultiHandler(webapp2.RequestHandler):
     def get(self):
@@ -61,7 +59,27 @@ class ReadHandler(webapp2.RequestHandler):
 
 class DeleteHandler(webapp2.RequestHandler):
     def get(self):
-        people = Person.query().fetch()
-        for person in people:
-            person.key.delete()
+        person = Person.query(Person.email == 'andres.acebedo@mail.com').fetch()[0]
+        person.key.delete()
         self.response.write('Deleted Person!')
+
+class DeleteAllHandler(webapp2.RequestHandler):
+    def get(self):
+        people = Person.query().fetch(keys_only=True)
+        ndb.delete_multi(people)
+        self.response.write('Deleted Person!')
+
+class ReadAllKeysHandler(webapp2.RequestHandler):
+    def get(self):
+        people_keys = Person.query().fetch(keys_only=True)
+        for person_key in people_keys:
+            self.response.write('kind: %s <br>'% person_key.kind())
+            self.response.write('id: %s <br>'% person_key.id())
+            self.response.write('urlsafe: %s <br>'% person_key.urlsafe())
+            self.response.write('<hr>')
+
+class CallHookHandler(webapp2.RequestHandler):
+    def get(self):
+        company = Company(domain='mail.com', employees_amount=5)
+        company.put()
+        self.response.write('Inserted Person!')
