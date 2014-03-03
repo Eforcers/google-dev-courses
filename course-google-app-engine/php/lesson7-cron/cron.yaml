@@ -1,0 +1,4 @@
+cron:
+- description: minute job
+  url: /cron
+  schedule: every 1 minutes synchronized
