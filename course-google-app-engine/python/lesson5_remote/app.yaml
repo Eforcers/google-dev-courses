@@ -6,6 +6,7 @@ threadsafe: yes
 
 builtins:
 - remote_api: on
+- appstats: on
 
 handlers:
 - url: /favicon\.ico
